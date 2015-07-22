@@ -2,8 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import exphbs from 'express-handlebars';
-import posts from './post-fixtures';
-import router from './router/router';
+import router from './routes/router';
 
 var app = express();
 

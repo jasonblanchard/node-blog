@@ -1,26 +1,26 @@
-import posts from '../post-fixtures';
+import posts from '../models/post_fixtures';
+import postModel from '../models/post';
 
 export default {
 
-  get: function(req, res) {
-    res.render('posts/index', {posts: posts});
+  index(req, res) {
+    postModel.find({}, () => {
+      res.render('posts/index', {posts: posts});
+    });
   },
 
-  edit: function(req, res) {
-    let post = posts.find((post) => {
-      return post.id === parseInt(req.params.id);
+  edit(req, res) {
+    postModel.find({id: req.params.id}, (post) => {
+      res.render('posts/edit', {post: post});
     });
-    res.render('posts/edit', {post: post});
   },
 
-  update: function(req, res) {
-    let post = posts.find((post) => {
-      return post.id === parseInt(req.params.id);
+  update(req, res) {
+    postModel.find({id: req.params.id}, (post) => {
+      post.title = req.body.title
+      post.body = req.body.body;
+
+      res.redirect('/posts');
     });
-
-    post.title = req.body.title
-    post.body = req.body.body;
-
-    res.redirect('/posts');
   }
 }

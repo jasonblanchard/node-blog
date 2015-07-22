@@ -1,4 +1,4 @@
-import posts from './routes/posts';
+import posts from './posts';
 
 export default {
   initialize: function(app) {
