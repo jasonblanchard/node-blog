@@ -1,28 +1,10 @@
 import express from 'express';
-import posts from '../../post-fixtures';
+import posts from '../../controllers/posts';
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('posts/index', {posts: posts});
-});
-
-router.get('/:id/edit', (req, res) => {
-  let post = posts.find((post) => {
-    return post.id === parseInt(req.params.id);
-  });
-  res.render('posts/edit', {post: post});
-});
-
-router.post('/:id/update', (req, res) => {
-  let post = posts.find((post) => {
-    return post.id === parseInt(req.params.id);
-  });
-
-  post.title = req.body.title
-  post.body = req.body.body;
-
-  res.redirect('/posts');
-});
+router.get('/', posts.get);
+router.get('/:id/edit', posts.edit);
+router.put('/:id', posts.update);
 
 export default router;
