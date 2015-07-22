@@ -9,6 +9,12 @@ export default {
     });
   },
 
+  show(req, res) {
+    postModel.find({id: req.params.id}, (post) => {
+      res.render('posts/show', {post: post});
+    });
+  },
+
   edit(req, res) {
     postModel.find({id: req.params.id}, (post) => {
       res.render('posts/edit', {post: post});
@@ -20,7 +26,7 @@ export default {
       post.title = req.body.title
       post.body = req.body.body;
 
-      res.redirect('/posts');
+      res.redirect(`/posts/${req.params.id}`);
     });
   }
 }
