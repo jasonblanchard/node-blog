@@ -4,7 +4,6 @@ export default {
 
   index(req, res) {
     postModel.find({}, (posts) => {
-      debugger;
       res.render('posts/index', {posts: posts});
     });
   },
