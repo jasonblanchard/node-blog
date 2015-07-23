@@ -27,5 +27,11 @@ export default {
 
       res.redirect(`/posts/${req.params.id}`);
     });
+  },
+
+  destroy(req, res) {
+    postModel.destroy(req.params.id, () => {
+      res.redirect('/posts');
+    });
   }
 }

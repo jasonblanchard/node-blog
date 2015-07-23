@@ -16,5 +16,15 @@ export default {
 
       return
     }
+  },
+
+  destroy(id, cb) {
+    postFixtures.forEach((post, index) => {
+      if (post.id === parseInt(id)) {
+        delete postFixtures[index];
+      }
+    });
+    
+    cb();
   }
 }

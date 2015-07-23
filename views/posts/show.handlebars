@@ -1,5 +1,8 @@
 <h2>{{post.title}}</h2>
 <a href='/posts/{{post.id}}/edit'>edit</a>
+<form method='POST' action='/posts/{{post.id}}?_method=DELETE'>
+  <input type='submit' value='delete'>
+</form>
 <div>
   {{post.body}}
 </div>

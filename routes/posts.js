@@ -7,5 +7,6 @@ router.get('/', posts.index);
 router.get('/:id', posts.show);
 router.get('/:id/edit', posts.edit);
 router.put('/:id', posts.update);
+router.delete('/:id', posts.destroy);
 
 export default router;
