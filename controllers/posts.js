@@ -1,10 +1,10 @@
-import posts from '../models/post_fixtures';
 import postModel from '../models/post';
 
 export default {
 
   index(req, res) {
-    postModel.find({}, () => {
+    postModel.find({}, (posts) => {
+      debugger;
       res.render('posts/index', {posts: posts});
     });
   },
