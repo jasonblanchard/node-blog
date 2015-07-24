@@ -10,13 +10,13 @@ export default {
 
   show(req, res) {
     postModel.find({id: req.params.id}, (post) => {
-      res.render('posts/show', {post: post});
+      res.render('posts/show', {post: post, csrfToken: res.locals.csrf});
     });
   },
 
   edit(req, res) {
     postModel.find({id: req.params.id}, (post) => {
-      res.render('posts/edit', {post: post});
+      res.render('posts/edit', {post: post, csrfToken: res.locals.csrf});
     });
   },
 
