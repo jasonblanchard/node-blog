@@ -3,6 +3,9 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import exphbs from 'express-handlebars';
 import router from './routes/router';
+import env from './env.json';
+
+var config = env[process.env.NODE_ENV || 'development']
 
 var app = express();
 
@@ -18,4 +21,4 @@ app.set('view engine', 'handlebars');
 
 router.initialize(app);
 
-app.listen(8081);
+app.listen(config.app.port);
