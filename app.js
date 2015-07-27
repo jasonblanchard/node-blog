@@ -38,4 +38,15 @@ app.set('view engine', 'handlebars');
 // Routes
 router.initialize(app);
 
+// 404s
+app.use((req, res) => {
+  res.status(404).send('404 :(');
+});
+
+// 500s
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(500).send('500 :('  + err.stack);
+});
+
 app.listen(config.app.port);

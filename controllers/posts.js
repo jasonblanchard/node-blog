@@ -8,6 +8,16 @@ export default {
     });
   },
 
+  new(req, res) {
+    res.render('posts/new', {csrfToken: res.locals.csrf});
+  },
+
+  create(req, res) {
+    postModel.create(req.body, (post) => {
+      res.render('posts/show', {post: post});
+    });
+  },
+
   show(req, res) {
     postModel.find({id: req.params.id}, (post) => {
       res.render('posts/show', {post: post, csrfToken: res.locals.csrf});

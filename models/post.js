@@ -18,6 +18,18 @@ export default {
     }
   },
 
+  create(post_params, cb) {
+    let post = {}
+    let id = postFixtures.length + 1;
+    post.id = id;
+    post.title = post_params.title;
+    post.body = post_params.body;
+
+    postFixtures.push(post);
+
+    cb(post);
+  },
+
   destroy(id, cb) {
     postFixtures.forEach((post, index) => {
       if (post.id === parseInt(id)) {
