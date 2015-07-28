@@ -31,11 +31,13 @@ export default {
   },
 
   update(req, res) {
-    postModel.find({id: req.params.id}, (post) => {
-      post.title = req.body.title
-      post.body = req.body.body;
+    let params = {};
+    params.title = req.body.title;
+    params.body = req.body.body;
 
-      res.redirect(`/posts/${req.params.id}`);
+
+    postModel.update(req.params.id, params, (post) => {
+      res.redirect(`/posts/${post.id}`);
     });
   },
 

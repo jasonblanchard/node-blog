@@ -1,42 +1,55 @@
 import postFixtures from './post_fixtures';
+import bookshelf from '../config/bookshelf';
+
+var Post = bookshelf.Model.extend({
+  tableName: 'posts'
+});
 
 export default {
   find(options, cb) {
     if (Object.keys(options).length === 0) {
-      cb(postFixtures);
+      Post.fetchAll().then((posts) => {
+        let serialized = posts.map((post) => {
+          return post.toJSON();
+        });
+        cb(serialized);
+      });
       return
     }
 
     if (options.id != undefined) {
-      let post = postFixtures.find((post) => {
-        return post.id === parseInt(options.id);
+      Post.where({id: options.id}).fetch().then((post) => {
+        cb(post.toJSON());
       });
-
-      cb(post);
 
       return
     }
+  },
+
+  update(id, params, cb) {
+    Post.where({id: id}).fetch().then((post) => {
+      post.save(params).then((post) => {
+        cb(post.toJSON());
+      });
+    });
   },
 
   create(post_params, cb) {
     let post = {}
     let id = postFixtures.length + 1;
-    post.id = id;
     post.title = post_params.title;
     post.body = post_params.body;
 
-    postFixtures.push(post);
-
-    cb(post);
+    new Post(post).save().then((newPost) => {
+      cb(post);
+    });
   },
 
   destroy(id, cb) {
-    postFixtures.forEach((post, index) => {
-      if (post.id === parseInt(id)) {
-        delete postFixtures[index];
-      }
+    Post.where({id: id}).fetch().then((post) => {
+      post.destroy();
+      cb();
     });
-    
-    cb();
+  
   }
 }
