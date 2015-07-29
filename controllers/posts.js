@@ -34,7 +34,7 @@ export default {
     let params = {};
     params.title = req.body.title;
     params.body = req.body.body;
-
+    params.updated_at = new Date;
 
     postModel.update(req.params.id, params, (post) => {
       res.redirect(`/posts/${post.id}`);

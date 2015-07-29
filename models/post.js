@@ -39,6 +39,7 @@ export default {
     let id = postFixtures.length + 1;
     post.title = post_params.title;
     post.body = post_params.body;
+    post.created_at = new Date;
 
     new Post(post).save().then((newPost) => {
       cb(post);
