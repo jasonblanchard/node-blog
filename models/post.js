@@ -29,7 +29,7 @@ export default {
     }
   },
 
-  update(id, params, cb) {
+  update(id, params) {
 
     return Post.where({id: id}).fetch()
     .then((post) => {
@@ -41,21 +41,20 @@ export default {
 
   },
 
-  create(post_params, cb) {
+  create(post_params) {
     let post = {}
-    let id = postFixtures.length + 1;
     post.title = post_params.title;
     post.body = post_params.body;
 
-    new Post(post).save().then((newPost) => {
-      cb(newPost);
+    return new Post(post).save().then((newPost) => {
+      return Promise.resolve(newPost.toJSON());
     });
   },
 
   destroy(id, cb) {
-    Post.where({id: id}).fetch().then((post) => {
+    return Post.where({id: id}).fetch()
+    .then((post) => {
       post.destroy();
-      cb();
     });
   
   }

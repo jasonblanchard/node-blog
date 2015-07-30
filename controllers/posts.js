@@ -13,8 +13,8 @@ export default {
   },
 
   create(req, res) {
-    postModel.create(req.body, (post) => {
-      res.redirect(`posts/${post.get('id')}`);
+    postModel.create(req.body).then((post) => {
+      res.redirect(`posts/${post.id}`);
     });
   },
 
@@ -41,7 +41,8 @@ export default {
   },
 
   destroy(req, res) {
-    postModel.destroy(req.params.id, () => {
+    postModel.destroy(req.params.id).then(() => {
+      // TODO This is redirecting before the records are destroyed from the database
       res.redirect('/posts');
     });
   }
