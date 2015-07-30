@@ -9,21 +9,26 @@ var Post = bookshelf.Model.extend({
 export default {
   find(options, cb) {
     if (Object.keys(options).length === 0) {
-      Post.fetchAll().then((posts) => {
+
+      return Post.fetchAll().then((posts) => {
         let serialized = posts.map((post) => {
           return post.toJSON();
         });
-        cb(serialized);
+
+        return new Promise((resolve, reject) => {
+          resolve(serialized);
+        });
       });
-      return
+
     }
 
     if (options.id != undefined) {
-      Post.where({id: options.id}).fetch().then((post) => {
-        cb(post.toJSON());
-      });
 
-      return
+      return new Promise((resolve, reject) => {
+        Post.where({id: options.id}).fetch().then((post) => {
+          resolve(post.toJSON());
+        });
+      });
     }
   },
 

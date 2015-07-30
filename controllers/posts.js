@@ -3,7 +3,7 @@ import postModel from '../models/post';
 export default {
 
   index(req, res) {
-    postModel.find({}, (posts) => {
+    postModel.find({}).then((posts) => {
       res.render('posts/index', {posts: posts});
     });
   },
@@ -19,7 +19,7 @@ export default {
   },
 
   show(req, res) {
-    postModel.find({id: req.params.id}, (post) => {
+    postModel.find({id: req.params.id}).then((post) => {
       res.render('posts/show', {post: post, csrfToken: res.locals.csrf});
     });
   },
