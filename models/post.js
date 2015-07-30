@@ -2,7 +2,8 @@ import postFixtures from './post_fixtures';
 import bookshelf from '../config/bookshelf';
 
 var Post = bookshelf.Model.extend({
-  tableName: 'posts'
+  tableName: 'posts',
+  hasTimestamps: true
 });
 
 export default {
@@ -39,10 +40,9 @@ export default {
     let id = postFixtures.length + 1;
     post.title = post_params.title;
     post.body = post_params.body;
-    post.created_at = new Date;
 
     new Post(post).save().then((newPost) => {
-      cb(post);
+      cb(newPost);
     });
   },
 
