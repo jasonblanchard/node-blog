@@ -7,17 +7,14 @@ var Post = bookshelf.Model.extend({
 });
 
 export default {
-  find(options, cb) {
+  find(options) {
     if (Object.keys(options).length === 0) {
 
-      return Post.fetchAll().then((posts) => {
-        let serialized = posts.map((post) => {
-          return post.toJSON();
-        });
-
-        return new Promise((resolve, reject) => {
-          resolve(serialized);
-        });
+      return Post.fetchAll()
+      .then((posts) => {
+        return Promise.resolve(
+          posts.map((post) => { return post.toJSON() })
+        );
       });
 
     }
@@ -33,11 +30,15 @@ export default {
   },
 
   update(id, params, cb) {
-    Post.where({id: id}).fetch().then((post) => {
-      post.save(params).then((post) => {
-        cb(post.toJSON());
-      });
+
+    return Post.where({id: id}).fetch()
+    .then((post) => {
+      return post.save(params);
+    })
+    .then((post) => {
+      return Promise.resolve(post.toJSON());
     });
+
   },
 
   create(post_params, cb) {

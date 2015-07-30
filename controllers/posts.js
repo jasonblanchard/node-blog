@@ -25,7 +25,7 @@ export default {
   },
 
   edit(req, res) {
-    postModel.find({id: req.params.id}, (post) => {
+    postModel.find({id: req.params.id}).then((post) => {
       res.render('posts/edit', {post: post, csrfToken: res.locals.csrf});
     });
   },
@@ -35,7 +35,7 @@ export default {
     params.title = req.body.title;
     params.body = req.body.body;
 
-    postModel.update(req.params.id, params, (post) => {
+    postModel.update(req.params.id, params).then((post) => {
       res.redirect(`/posts/${post.id}`);
     });
   },
