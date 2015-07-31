@@ -42,7 +42,6 @@ export default {
 
   destroy(req, res) {
     postModel.destroy(req.params.id).then(() => {
-      // TODO This is redirecting before the records are destroyed from the database
       res.redirect('/posts');
     });
   }

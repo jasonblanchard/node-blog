@@ -1,4 +1,3 @@
-import postFixtures from './post_fixtures';
 import bookshelf from '../config/bookshelf';
 
 var Post = bookshelf.Model.extend({
@@ -54,7 +53,7 @@ export default {
   destroy(id, cb) {
     return Post.where({id: id}).fetch()
     .then((post) => {
-      post.destroy();
+      return post.destroy();
     });
   
   }
