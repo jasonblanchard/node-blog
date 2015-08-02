@@ -7,7 +7,7 @@ export default {
       return Post.fetchAll()
       .then((posts) => {
         return Promise.resolve(
-          posts.map((post) => { return post.toJSON() })
+          posts.map((post) => { return post.toJSON() }).reverse()
         );
       });
 
