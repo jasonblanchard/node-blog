@@ -1,4 +1,4 @@
-import bookshelf from '../config/bookshelf';
+import bookshelf from '../../config/bookshelf';
 
 var Post = bookshelf.Model.extend({
   tableName: 'posts',

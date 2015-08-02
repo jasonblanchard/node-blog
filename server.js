@@ -4,8 +4,8 @@ import cookieParser from 'cookie-parser';
 import csrf from 'csurf';
 import methodOverride from 'method-override';
 import exphbs from 'express-handlebars';
-import router from './routes/router';
-import env from './env.json';
+import router from './app/routes/router';
+import env from './config/env.json';
 
 var config = env[process.env.NODE_ENV || 'development']
 
