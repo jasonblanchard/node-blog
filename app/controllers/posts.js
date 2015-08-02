@@ -1,9 +1,9 @@
-import postModel from '../models/post';
+import postService from '../services/post_service';
 
 export default {
 
   index(req, res) {
-    postModel.find({}).then((posts) => {
+    postService.find({}).then((posts) => {
       res.render('posts/index', {posts: posts});
     });
   },
@@ -13,19 +13,19 @@ export default {
   },
 
   create(req, res) {
-    postModel.create(req.body).then((post) => {
+    postService.create(req.body).then((post) => {
       res.redirect(`posts/${post.id}`);
     });
   },
 
   show(req, res) {
-    postModel.find({id: req.params.id}).then((post) => {
+    postService.find({id: req.params.id}).then((post) => {
       res.render('posts/show', {post: post, csrfToken: res.locals.csrf});
     });
   },
 
   edit(req, res) {
-    postModel.find({id: req.params.id}).then((post) => {
+    postService.find({id: req.params.id}).then((post) => {
       res.render('posts/edit', {post: post, csrfToken: res.locals.csrf});
     });
   },
@@ -35,13 +35,13 @@ export default {
     params.title = req.body.title;
     params.body = req.body.body;
 
-    postModel.update(req.params.id, params).then((post) => {
+    postService.update(req.params.id, params).then((post) => {
       res.redirect(`/posts/${post.id}`);
     });
   },
 
   destroy(req, res) {
-    postModel.destroy(req.params.id).then(() => {
+    postService.destroy(req.params.id).then(() => {
       res.redirect('/posts');
     });
   }
