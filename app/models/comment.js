@@ -1,11 +1,12 @@
 import bookshelf from '../../config/bookshelf';
-import Comment from './comment';
+import Post from './post';
 
 export default bookshelf.Model.extend({
-  tableName: 'posts',
+  tableName: 'comments',
   hasTimestamps: true,
 
-  comments() {
-    return this.hasMany(Comment);
+  post() {
+    return this.belongsTo(Post);
   }
+
 });

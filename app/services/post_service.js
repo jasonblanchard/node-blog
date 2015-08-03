@@ -16,7 +16,9 @@ export default {
     if (options.id != undefined) {
 
       return new Promise((resolve, reject) => {
-        Post.where({id: options.id}).fetch().then((post) => {
+        Post.where({id: options.id}).fetch({
+          withRelated: ['comments']
+        }).then((post) => {
           resolve(post.toJSON());
         });
       });
