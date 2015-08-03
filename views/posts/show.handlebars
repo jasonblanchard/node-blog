@@ -15,8 +15,22 @@
 
 <a href='/posts'>Back</a>
 
+<form method='POST' action='/posts/{{post.id}}/comments' method='POST'>
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  <textarea name='body'></textarea>
+  <br />
+  <input type='submit' value='comment'>
+</form>
+
 <h3>Comments</h3>
+
 {{#each post.comments}}
   <hr>
-  {{body}}
+  <p>
+    {{body}}
+  </p>
+  <form method='POST' action='/posts/{{post_id}}/comments/{{id}}?_method=DELETE'>
+    <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+    <input type='submit' value='delete'>
+  </form>
 {{/each}}

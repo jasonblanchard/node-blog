@@ -4,12 +4,16 @@ import cookieParser from 'cookie-parser';
 import csrf from 'csurf';
 import methodOverride from 'method-override';
 import exphbs from 'express-handlebars';
+import morgan from 'morgan';
 import router from './app/routes/router';
 import env from './config/env.json';
 
 var config = env[process.env.NODE_ENV || 'development']
 
 var app = express();
+
+// Logger
+app.use(morgan('dev'))
 
 // static files
 app.use(express.static('public'));
